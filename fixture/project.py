@@ -39,7 +39,8 @@ class ProjectHelper:
             wd = self.app.wd
             self.go_to_manage_projects_page()
             self.project_cache = []
-            rows = wd.find_elements_by_xpath("//tr[contains(@class, 'row-')][not(contains(@class, 'category'))][not(ancestor::a)]")
+            rows = wd.find_elements_by_xpath("//tr[contains(@class, 'row-')][not(contains(@class, 'category'))]"
+                                             "[not(ancestor::a)]")
             for row in rows:
                 cells = row.find_elements_by_tag_name("td")
                 id = cells[0].find_element_by_tag_name("a").get_attribute("href").split("=", 1)[1]
@@ -55,7 +56,7 @@ class ProjectHelper:
             cells = row.find_elements_by_tag_name("td")
             name = cells[0].find_element_by_tag_name("a").text
             id = cells[0].find_element_by_tag_name("a").get_attribute("href").split("=", 1)[1]
-            if name == project_name:
+            if name == str(project_name):
                 return id
 
     def find_name_by_id(self, project_id):
@@ -66,7 +67,7 @@ class ProjectHelper:
             cells = row.find_elements_by_tag_name("td")
             name = cells[0].find_element_by_tag_name("a").text
             id = cells[0].find_element_by_tag_name("a").get_attribute("href").split("=", 1)[1]
-            if id == project_id:
+            if id == str(project_id):
                 return name
 
 
